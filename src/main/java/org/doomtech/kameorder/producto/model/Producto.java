@@ -1,22 +1,21 @@
-package org.doomtech.kameorder.plato.model;
+package org.doomtech.kameorder.producto.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "platos")
-@Data
+@Table(name = "tbl_productos")
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Plato {
+public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,16 +23,15 @@ public class Plato {
 
     @Column(nullable = false)
     private String nombre;
-
     private String descripcion;
 
-    private String categoria; // entrada, bebida, etc.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id", referencedColumnName = "idCatergoriaProducto")
+    private CategoriaProducto categoria;
 
     @Column(nullable = false)
     private Double precio;
-
     private Boolean disponible = true;
-
     private String imagenUrl;
 
     @CreationTimestamp

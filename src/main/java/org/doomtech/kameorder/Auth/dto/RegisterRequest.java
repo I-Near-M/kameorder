@@ -21,11 +21,11 @@ public class RegisterRequest {
     private String password;
 
     @NotBlank(message = "First name is required")
-    private String firstName;
+    private String nombre;
 
     @NotBlank(message = "Last name is required")
-    private String lastName;
+    private String apellidoPaterno;
 
     @NotBlank(message = "Country is required")
-    private String country;
+    private String apellidoMaterno;
 }
