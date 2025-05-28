@@ -38,9 +38,9 @@ public class AuthService {
         User user = User.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .country(request.getCountry())
+                .nombre(request.getNombre())
+                .apellidoPaterno(request.getApellidoPaterno())
+                .apellidoMaterno(request.getApellidoMaterno())
                 .role(Role.USER)
                 .build();
         userRepository.save(user);
