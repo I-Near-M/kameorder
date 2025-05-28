@@ -2,6 +2,7 @@ package org.doomtech.kameorder.pedido.model;
 
         import jakarta.persistence.*;
         import lombok.*;
+        import org.doomtech.kameorder.establecimientos.model.Ambiente;
         import org.doomtech.kameorder.mesa.model.Mesa;
         import org.doomtech.kameorder.pedidoplato.model.PedidoProducto;
         import org.doomtech.kameorder.user.model.User;
@@ -37,17 +38,12 @@ package org.doomtech.kameorder.pedido.model;
 
             @CreationTimestamp
             private LocalDateTime creadoEn;
-
             private LocalDateTime cerradoEn;
-
-            public enum EstadoPedido {
-                EN_CURSO,
-                COCINA,
-                LISTO,
-                ENTREGADO,
-                CERRADO
-            }
 
             @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
             private List<PedidoProducto> productos;
+
+            @ManyToOne(fetch = FetchType.LAZY)
+            @JoinColumn(name = "ambiente_id", nullable = false)
+            private Ambiente ambiente;
         }
